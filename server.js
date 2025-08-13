@@ -6,7 +6,14 @@ const path = require("path");
 const app = express();
 const collegeRoutes = require('./routes/colleges');
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // local dev
+    'https://vercel-frontend-strd.vercel.app' // deployed frontend
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 connectDB();
