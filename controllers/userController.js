@@ -163,12 +163,10 @@ exports.updateUserProfile = async (req, res) => {
         : interests.split(',').map(i => i.trim()).filter(i => i);
     }
 
-    // ✅ CHANGE 1: If `req.file` exists (uploaded new profile image)
+    // ✅ Cloudinary file URL directly from multer
     if (req.file) {
-      user.profilePic = `/uploads/${req.file.filename}`;
-    }
-    // ✅ CHANGE 2: Else if profilePic text provided (URL/path)
-    else if (req.body.profilePic) {
+      user.profilePic = req.file.path;
+    } else if (req.body.profilePic) {
       user.profilePic = req.body.profilePic;
     }
 
