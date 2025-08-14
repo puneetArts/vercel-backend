@@ -10,7 +10,7 @@ exports.createAchievement = async (req, res) => {
       title,
       description,
       date,
-      certificate: req.file ? `/uploads/${req.file.filename}` : undefined
+      certificate: req.file ? req.file.path : undefined 
     });
 
     await achievement.save();
