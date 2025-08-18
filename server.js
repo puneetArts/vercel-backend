@@ -9,7 +9,8 @@ const collegeRoutes = require('./routes/colleges');
 app.use(cors({
   origin: [
     'http://localhost:5173', // local dev
-    'https://vercel-frontend-wmdy.vercel.app' // deployed frontend 
+    'https://vercel-frontend-wmdy.vercel.app' // deployed frontend    process.env.FRONTEND_URL // production frontend
+
   ],
   credentials: true
 }));
