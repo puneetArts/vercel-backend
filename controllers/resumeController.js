@@ -10,8 +10,8 @@ exports.uploadResume = async (req, res) => {
     const resume = new Resume({
       user: req.user._id,
       college: req.user.college,
-      resumeUrl: req.file.path, // Cloudinary URL
-      originalName: req.file.originalname,
+      fileUrl: req.file.path, // Cloudinary URL
+      fileName: req.file.originalname,
     });
 
     await resume.save();
