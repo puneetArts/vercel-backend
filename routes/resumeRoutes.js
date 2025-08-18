@@ -8,7 +8,7 @@ const auth = require('../middlewares/authMiddleware');
 router.post("/", auth, resumeUpload.single("resume"), uploadResume);
 
 // Get user resumes
-router.get("/user/:userId", auth, getUserResumes);
+router.get("/user/:userId", auth, resumeController.getUserResume);
 
 // Get college resumes
 router.get("/college", auth, getCollegeResumes);

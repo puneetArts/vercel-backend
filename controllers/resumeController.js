@@ -22,12 +22,18 @@ exports.uploadResume = async (req, res) => {
 };
 
 // Get resumes of a user
-exports.getUserResumes = async (req, res) => {
+// Get the latest resume of a user
+exports.getUserResume = async (req, res) => {
   try {
-    const resumes = await Resume.find({ user: req.params.userId })
+    const resume = await Resume.findOne({ user: req.params.userId })
       .populate("user", "name profilePic")
-      .sort({ createdAt: -1 });
-    res.json(resumes);
+      .sort({ createdAt: -1 }); // gets most recent one
+
+    if (!resume) {
+      return res.status(404).json({ msg: "No resume uploaded" });
+    }
+
+    res.json(resume); // ✅ single object, not array
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
