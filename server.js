@@ -9,7 +9,7 @@ const collegeRoutes = require('./routes/colleges');
 app.use(cors({
   origin: [
     'http://localhost:5173', // local dev
-    'https://vercel-frontend-hr3u.vercel.app' // deployed frontend
+    'https://vercel-frontend-ltqb.vercel.app' // deployed frontend https://vercel-frontend-ltqb.vercel.app/
   ],
   credentials: true
 }));
@@ -27,7 +27,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use('/api/achievements', require('./routes/achievements'));
 app.use('/api/posts', require('./routes/posts'));
 
-app.use('/api/resumes', require('./routes/resumeRoutes')); // ✅ For RESUME
+// app.use('/api/resumes', require('./routes/resumeRoutes')); // ✅ For RESUME
 
 
 // Seed colleges if none exist (optionally run only once)
