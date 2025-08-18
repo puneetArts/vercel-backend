@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const resumeUpload = require("../middlewares/resumeUpload");
 const { uploadResume, getUserResumes, getCollegeResumes } = require("../controllers/resumeController");
-const auth = require("../middleware/auth");
+const auth = require('../middlewares/authMiddleware');
 
 // Upload resume
 router.post("/", auth, resumeUpload.single("resume"), uploadResume);
