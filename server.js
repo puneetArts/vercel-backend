@@ -5,6 +5,8 @@ const connectDB = require("./config/db");
 const path = require("path");
 const app = express();
 const collegeRoutes = require('./routes/colleges');
+const clubsRouter = require('./routes/clubRoutes'); 
+
 
 app.use(cors({
   origin: [
@@ -29,6 +31,8 @@ app.use('/api/achievements', require('./routes/achievements'));
 app.use('/api/posts', require('./routes/posts'));
 
 // app.use('/api/resumes', require('./routes/resumeRoutes')); // ✅ NEW
+
+app.use('/api/clubs', clubsRouter);
 
 
 // Seed colleges if none exist (optionally run only once)
