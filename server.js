@@ -13,6 +13,7 @@ const app = express();
 const collegeRoutes = require('./routes/colleges');
 const clubsRouter = require('./routes/clubRoutes'); 
 
+
 app.use(cors({
   origin: [
     'http://localhost:5173', // local dev
