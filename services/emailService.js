@@ -2,24 +2,35 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail", // ✅ lowercase
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false, // must be false for 587
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_PASS
+  }
+});
+
+// optional: verify SMTP connection at startup
+transporter.verify((err, success) => {
+  if (err) {
+    console.error("❌ Brevo SMTP ERROR:", err.message);
+  } else {
+    console.log("✅ Brevo SMTP Ready");
   }
 });
 
 const sendEmail = async ({ to, subject, html }) => {
   try {
     await transporter.sendMail({
-      from: `"LynxApp" <${process.env.EMAIL_USER}>`,
+      from: process.env.EMAIL_FROM || "LynxApp <no-reply@lynxapp.com>",
       to,
       subject,
       html
     });
   } catch (err) {
-    console.error("EMAIL ERROR 👉", err.message);
-    throw err; // important so controller returns 500
+    console.error("❌ EMAIL SEND FAILED:", err.message);
+    throw err; // keeps correct 500 handling
   }
 };
 
