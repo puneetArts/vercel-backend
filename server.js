@@ -3,10 +3,15 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const path = require("path");
+
+
+
 const app = express();
+
+
+
 const collegeRoutes = require('./routes/colleges');
 const clubsRouter = require('./routes/clubRoutes'); 
-
 
 app.use(cors({
   origin: [
@@ -16,10 +21,13 @@ app.use(cors({
   ],
   credentials: true
 }));
-
 app.use(express.json());
 
+
+
 connectDB();
+
+
 
 // ROUTES
 app.use("/api/auth", require("./routes/auth"));
@@ -29,6 +37,8 @@ app.use("/api/users", require("./routes/users"));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use('/api/achievements', require('./routes/achievements'));
 app.use('/api/posts', require('./routes/posts'));
+app.use("/api/otp", require("./routes/otp"));
+
 
 // app.use('/api/resumes', require('./routes/resumeRoutes')); // ✅ NEW
 

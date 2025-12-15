@@ -1,6 +1,3 @@
-const Post = require('../models/Post');
-const cloudinary = require("cloudinary").v2;
-
 // exports.createPost = async (req, res) => {
 //   try {
 //     const { content } = req.body;
@@ -40,6 +37,11 @@ const cloudinary = require("cloudinary").v2;
 //     res.status(500).json({ msg: err.message });
 //   }
 // };
+// 
+
+
+const Post = require('../models/Post');
+const cloudinary = require("cloudinary").v2;
 
 
 exports.createPost = async (req, res) => {
@@ -80,4 +82,4 @@ exports.getCollegePosts = async (req, res) => {
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
-};
+};  
