@@ -9,8 +9,6 @@ const { generateOTP } = require("../services/otpService");
 
 const { sendEmail } = require("../services/emailService");
 
-
-
 // exports.signup = async (req, res) => {
 //   try {
 //     const { name, email, password, collegeId } = req.body;
@@ -39,7 +37,7 @@ exports.signup = async (req, res) => {
       email,
       password: hash,
       college: collegeId,
-      isEmailVerified: false
+      isEmailVerified: false,
     });
 
     const otp = await generateOTP(user._id, "EMAIL_VERIFY");
@@ -48,19 +46,63 @@ exports.signup = async (req, res) => {
       to: email,
       subject: "Verify your LynxApp account",
       html: `
-        <h3>Your OTP is <b>${otp}</b></h3>
-        <p>This OTP is valid for 10 minutes.</p>
-      `
+  <div style="font-family: Arial, sans-serif; background-color: #292c2fff; padding: 30px;">
+    <div style="max-width: 500px; margin: auto; background: #0f172a; padding: 25px; border-radius: 8px;">
+      
+      <h2 style="color: #205d9aff; text-align: center;">
+        Welcome to LynxApp
+      </h2>
+
+      <p style="font-size: 15px; color: #e5e7eb;">
+        We're excited to have you on <b>LynxApp</b> — a platform built to help students connect, collaborate, and grow together.
+      </p>
+
+      <p style="font-size: 15px; color: #e5e7eb">
+        To continue, please verify your email using the One-Time Password (OTP) below:
+      </p>
+
+      <div style="text-align: center; margin: 25px 0;">
+        <span style="
+          font-size: 28px;
+          letter-spacing: 4px;
+          font-weight: bold;
+          color: #1d5893ff;
+          background: #252729ff;
+          padding: 12px 20px;
+          border-radius: 6px;
+          
+          display: inline-block;
+        ">
+          ${otp}
+        </span>
+      </div>
+
+      <p style="font-size: 14px; color:  #cbd5f5;">
+        This OTP is valid for <b>10 minutes ⏱️</b>. Please do not share it with anyone.
+      </p>
+
+      <p style="font-size: 14px; color:  #9ca3af;">
+        If you did not create this account, you can safely ignore this email.
+      </p>
+
+      <hr style="margin: 10px 0; border: none; border-top: 1px solid #1f2937;" />
+
+      <p style="font-size: 13px; color: #6b7280; text-align: center;">
+        © ${new Date().getFullYear()} LynxApp · Connect. Collaborate. Grow.
+      </p>
+
+    </div>
+  </div>
+`,
     });
 
     res.status(201).json({
-      msg: "Signup successful. Please verify your email."
+      msg: "Signup successful. Please verify your email.",
     });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
 };
-
 
 // exports.login = async (req, res) => {
 //   try {
@@ -88,7 +130,7 @@ exports.login = async (req, res) => {
   if (!match) return res.status(400).json({ msg: "Invalid credentials" });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "12h"
+    expiresIn: "12h",
   });
 
   res.json({ token });
@@ -126,7 +168,7 @@ exports.updateUserProfile = async (req, res) => {
     const { name, bio, major, year, interests } = req.body;
 
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ msg: 'User not found' });
+    if (!user) return res.status(404).json({ msg: "User not found" });
 
     if (name !== undefined) user.name = name;
     if (bio !== undefined) user.bio = bio;
@@ -137,13 +179,13 @@ exports.updateUserProfile = async (req, res) => {
     // File handling with Cloudinary
     if (req.file) {
       const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-        folder: "profile_pics" // optional: stores in folder
+        folder: "profile_pics", // optional: stores in folder
       });
       user.profilePic = uploadResult.secure_url;
     }
 
     await user.save();
-    res.json({ msg: 'Profile updated', user });
+    res.json({ msg: "Profile updated", user });
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }

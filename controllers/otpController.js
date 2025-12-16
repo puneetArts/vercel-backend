@@ -29,7 +29,53 @@ exports.forgotPassword = async (req, res) => {
   await sendEmail({
     to: email,
     subject: "Reset your LynxApp password",
-    html: `<h3>OTP: ${otp}</h3>`
+    html: `
+  <div style="font-family: Arial, sans-serif; background-color: #292c2fff; padding: 30px;">
+    <div style="max-width: 500px; margin: auto; background: #0f172a; padding: 25px; border-radius: 8px;">
+      
+      <h2 style="color: #205d9aff; text-align: center;">Reset Password</h2>
+
+      <p style="font-size: 15px; color: #e5e7eb;">
+        We received a request to reset your password for your <b>LynxApp</b> account.
+      </p>
+
+      <p style="font-size: 15px; color: #e5e7eb;">
+        Use the following One-Time Password (OTP) to reset your password:
+      </p>
+
+      <div style="text-align: center; margin: 25px 0;">
+        <span style="
+          font-size: 28px;
+          letter-spacing: 4px;
+          font-weight: bold;
+          color: #1d5893ff;
+          background: #252729ff;
+          padding: 12px 20px;
+          border-radius: 6px;
+          display: inline-block;
+        ">
+          ${otp}
+        </span>
+      </div>
+
+      <p style="font-size: 14px; color: #cbd5f5;">
+        This OTP is valid for <b>10 minutes ⏱️</b>. Please do not share it with anyone.
+      </p>
+
+      <p style="font-size: 14px; color: #9ca3af;">
+        If you did not request a password reset, you can safely ignore this email.
+      </p>
+
+      <hr style="margin: 10px 0; border: none; border-top: 1px solid #1f2937;" />
+
+      <p style="font-size: 13px; color: #6b7280; text-align: center;">
+        © ${new Date().getFullYear()} LynxApp · Connect. Collaborate. Grow.
+      </p>
+
+    </div>
+  </div>
+`
+
   });
 
   res.json({ msg: "OTP sent to email" });
