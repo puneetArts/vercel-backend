@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
   major: { type: String, default: '' },
   year: { type: String, default: '' },
   interests: { type: [String], default: [] },
+  link: { type: String, default: '' },
+  web: { type: String, default: '' },
+  
 
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],            // confirmed friends
   friendRequestsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // requests user sent
