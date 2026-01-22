@@ -32,6 +32,9 @@ exports.forgotPassword = async (req, res) => {
     html: `
   <div style="font-family: Arial, sans-serif; background-color: #292c2fff; padding: 30px;">
     <div style="max-width: 500px; margin: auto; background: #0f172a; padding: 25px; border-radius: 8px;">
+      <h2 style={{ color: "rgb(247, 247, 247)", textAlign: "center" }}>
+  Lynx <span style={{ color: "#F79B72" }}>App</span>
+</h2>
       
       <h2 style="color: #205d9aff; text-align: center;">Reset Password</h2>
 
