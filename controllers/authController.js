@@ -49,10 +49,9 @@ exports.signup = async (req, res) => {
   <div style="font-family: Arial, sans-serif; background-color: #292c2fff; padding: 30px;">
     <div style="max-width: 500px; margin: auto; background: #0f172a; padding: 25px; border-radius: 8px;">
       
-      <h2 style={{ color: "rgb(247, 247, 247)", textAlign: "center" }}>
-  Lynx <span style={{ color: "#F79B72" }}>App</span>
-</h2>
-
+      <h1 style="color: rgb(247, 247, 247); text-align: center;">
+        Lynx<span style="color: #F79B72; text-align: center;">App</span>
+      </h1>
 
       <p style="font-size: 15px; color: #e5e7eb;">
         We're excited to have you on <b>LynxApp</b> — a platform built to help students connect, collaborate, and grow together.
