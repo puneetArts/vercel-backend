@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
   friendRequestsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   
 
+  role: {
+    type: String,
+    enum: ["student", "ambassador"],
+    default: "student",
+  },
+
 });
 
 
